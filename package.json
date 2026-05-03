@@ -1,7 +1,39 @@
 {
   "dependencies": {
+    "axios": "^1.15.2",
     "bcryptjs": "^3.0.3",
     "express": "^5.2.1",
-    "mongoose": "^9.3.3"
-  }
+    "mongodb": "^7.2.0",
+    "mongoose": "^9.5.0",
+    "react-router-dom": "^7.14.2"
+  },
+  "name": "mini-fiverr",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  },
+  "scripts": {
+    "start:client": "cd Freelance/Freelance && npm run dev",
+    "start:server": "cd server && node MiniFiverr.js",
+    "dev": "concurrently \"npm run start:client\" \"npm run start:server\"",
+    "build:client": "cd client && npm run build",
+    "build:server": "tsc -p server/tsconfig.json",
+    "build": "npm run build:client && npm run build:server",
+    "test": "echo \"Add test scripts here\"",
+    "lint": "eslint client/src server/**/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SaniaRose1/MiniFiverr.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/SaniaRose1/MiniFiverr/issues"
+  },
+  "homepage": "https://github.com/SaniaRose1/MiniFiverr#readme"
 }

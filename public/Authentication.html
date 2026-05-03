@@ -33,12 +33,35 @@
         border: 3px white solid;
         border-radius: 10px;
         background: linear-gradient(lightblue,rgb(36, 36, 192));
+        box-sizing: border-box;
     }
-    .btn.active{
-        background-color: blue;
-       color: black;
+    
+    #btn1{
+      border-radius: 10px;
+      width: 150px;
+      height: 35px;
+    }
+    #btn2{
+      border-radius: 10px;
+      width: 150px;
+      height: 35px;
+    }
+    .form-box{
+      display: flex;
+      flex-direction: column;
+      width: 300px;
+     
+    }
 
+    .hidden{
+      display: none;
     }
+    .active{
+      background-color: goldenrod;
+    
+    }
+
+    
   </style>
 </head>
 <body>
@@ -55,108 +78,168 @@
 
     </div>-->
     <div id="container3">
-         <input id="name" placeholder="Enter the name.." style="height: 30px; border-radius: 5px; font-weight: bold;"/>
-         <input id="email" placeholder="Enter the email Id.." style="height: 30px;border-radius: 5px;font-weight: bold;"/>
-         <input id="password" placeholder="Enter the password.." style="height: 30px;border-radius: 5px;font-weight: bold;"/>
-         <input id="skill" placeholder="Enter  your skill.." style="height: 30px;border-radius: 5px;font-weight: bold;"/>
-         <input id="rating" placeholder="Enter the rating.." style="height: 30px;border-radius: 5px;font-weight: bold;"/>
-         <input id="role" placeholder="Enter the role.." style="height: 30px;border-radius: 5px;font-weight: bold;"/>
-        
-         <div style="margin-top: 60px; display: flex; justify-content: center;gap: 4px;">
-         <button id="login" type="submit"    style="width: 200px; height: 45px;border-radius: 5px;color: darkred; font-weight: bold;">LOGIN</button>
+          <div class="btn-container" style=" display: flex;
+         
+    justify-content: center;
+    height: 55px;
+    width: 350px;
+    border: 2px solid black;
+    align-items: center;
+    border-radius: 10px; 
+    margin-left: 40px;"
+    
+    >
+             <button type="button" id="btn1"  onclick="showRole('poster')" >POSTER</button>
+             <button type="button" id="btn2"  onclick="showRole('freelancer')">FREELANCER</button>
+          </div>
+         
+          <div id="role-poster" class="form-box ">
+          <input type="text"    id="poster-name" placeholder="Enter the name.." style="height: 30px; border-radius: 5px; font-weight: bold;"/>
+         <input type="email"   id="poster-email" placeholder="Enter the email Id.." style="height: 30px;border-radius: 5px;font-weight: bold;"/>
+         <input type="password"   id="poster-password" placeholder="Enter the password.." style="height: 30px;border-radius: 5px;font-weight: bold;"/>
+
+         
+         
+         </div>
+         <div id= "role-freelancer" class="form-box hidden">
+           <input type="text" id="freelancer-name" placeholder="Enter the name.." style="height: 30px; border-radius: 5px; font-weight: bold;"/>
+         <input type="email"   id="freelancer-email" placeholder="Enter the email Id.." style="height: 30px;border-radius: 5px;font-weight: bold;"/>
+         <input type="password" id="freelancer-password" placeholder="Enter the password.." style="height: 30px;border-radius: 5px;font-weight: bold;"/>
+         <input type="text"   id="freelancer-skill" placeholder="Enter  your skill.." style="height: 30px;border-radius: 5px;font-weight: bold;"/>
+         <input type="number"    id="freelancer-rating" placeholder="Enter the rating.." style="height: 30px;border-radius: 5px;font-weight: bold;"/>
+      </div>
+      </div>
+      <div style="margin-top: 40px    ;display: flex; justify-content: center ;  gap: 4px;">
+         <button id="login" type="submit"   style="width: 200px; height: 45px;border-radius: 5px;color: darkred; font-weight: bold;">LOGIN</button>
           <button id="register" type="submit"      style="width: 200px;height: 45px;border-radius: 5px; color: forestgreen; font-weight: bold;">REGISTER</button>
          </div>
-         
-      </div>
+        
     </form>
    </div>
    </div>
    <p id="msg"></p>
     <script>
          const msg = document.getElementById('msg')
-         
-         /*const button = document.querySelectorAll('.btn');
-        let selectedRole="";
-       button.forEach(btn=>{
-        btn.addEventListener('click',function(){
-          
-            button.forEach((b)=>b.classList.remove('active'));
+            let selectedRole = "poster";
+            function showRole(role){
+              selectedRole = role;
+              document.getElementById('role-poster').style.display="none";
+              document.getElementById('role-freelancer').style.display="none";
 
-            this.classList.add("active");
+              document.getElementById('btn1').classList.remove("active");
+              document.getElementById('btn2').classList.remove("active");
+
+
+              if(role ==="poster"){
+                 document.getElementById('role-poster').style.display="block";
+                  document.getElementById('btn1').classList.add("active");
+              } else{
+                 document.getElementById('role-freelancer').style.display="block";
+                  document.getElementById('btn2').classList.add("active");
+
+              }
+            }
+               
+            window.onload = function(){
+              showRole('poster');
+            }
+
           
-               })
-           })*/
-      
             
-        document.getElementById('Auth1').addEventListener('submit',async (e) => {
+        document.getElementById('register').addEventListener('click',async (e) => {
         e.preventDefault();
-         
+
+          if(selectedRole === "poster"){
+             const name = document.getElementById('poster-name').value;
+             const email = document.getElementById('poster-email').value;
+              const password = document.getElementById('poster-password').value;
+          }
+          else{
+             const name = document.getElementById('freelancer-name').value;
+             const email = document.getElementById('freelancer-email').value;
+              const password = document.getElementById('freelancer-password').value;
+          }
+             
+             
+
+              let data = {
+                role:selectedRole,
+                name:name,
+                email:email,
+                password:password,
+              }
+              
+              if(role === "freelancer"){
+              const skill = document.getElementById('freelancer-skill').value;
+              const rating = document.getElementById('freelancer-rating').value;
+              
+              }
+              consol.log("Sending data", data);
         try{
-            const name = document.getElementById('name').value;
-             const email = document.getElementById('email').value;
-              const password = document.getElementById('password').value;
-               const skill = document.getElementById('skill').value;
-                const rating = document.getElementById('rating').value;
-                const role = document.getElementById('role').value;
+            
+       const res = await fetch("http://localhost:5000/api/auth/register", {
+        method:"Post",
+        headers:{
+          "Content-Type":"application/json"
+        },
+        body:JSON.stringify(data)
+       });
+          
+         const result = await res.json();
+         console.log(result);
 
-
-                const res = await fetch("api/auth/register",  {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-           name:name,
-           email:email,
-           password:password,
-           skill:skill,
-           rating:Number(rating),
-           role:role
-               })
-             })
-
-             const data = await res.json();
-               console.log(data);
-               alert(JSON.stringify(data));
+         document.getElementById("msg").innerText="Registered Successfully";
         }
         
        catch(error)
        {
-       document.getElementById('msg').innerText =error.msg;
+       consol.log("error", error);
        }
             
         })
 
-           document.getElementById('Auth1').addEventListener('submit',async (e) => {
+           document.getElementById('login').addEventListener('click',async (e) => {
         e.preventDefault();
          
-        try{
-            const name = document.getElementById('name').value;
-             const email = document.getElementById('email').value;
-              const password = document.getElementById('password').value;
-               const skill = document.getElementById('skill').value;
-                const rating = document.getElementById('rating').value;
-                  const role = document.getElementById('poster','freelancer').value;
+       if(selectedRole === "poster"){
+    const  email = document.getElementById('poster-email').value;
+    const  password = document.getElementById('poster-password').value;
+  } else {
+   const  email = document.getElementById('freelancer-email').value;
+   const password = document.getElementById('freelancer-password').value;
+  }
 
-                const res = await fetch("api/auth/login", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-         name:name,
-           email:email,
-           password:password,
-           skill:skill,
-           rating:Number(rating),
-           role:role
-               })
-                })
+  let data = {
+    role: selectedRole,
+    email,
+    password
+  };
 
-            const data = await res.json();
-              console.log(data);
-              alert(JSON.stringify(data));
+  console.log("Login data:", data);
+
+  try {
+    const res = await fetch("http://localhost:5000/api/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    });
+
+    const result = await res.json();
+    console.log(result);
+            
+
+              if(res.ok){
+                window.location.href ="http://localhost:5173/dashboard";
+              }else{
+                 document.getElementById("msg").innerText=result.message||"Login Failed";
+              }
             }
         
         
        catch(error){
-        document.getElementById('msg').innerText =error.msg;
+        consol.log("error", error);
        }
             
         })
